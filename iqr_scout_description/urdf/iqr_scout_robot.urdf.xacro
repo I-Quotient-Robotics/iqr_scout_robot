@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="iqr_scout_robot">
+
+  <xacro:property name="package_name" value="iqr_scout_description"/>
+
+  <!-- Include SCOUT ROBOT -->
+  <include filename="$(find scout_description)/urdf/scout_v2.xacro"/>
+
+  <!-- Include accessories -->
+  <xacro:include filename="$(find ${package_name})/urdf/vlp16.xacro"/>
+  <xacro:include filename="$(find ${package_name})/urdf/aubo_i5.xacro"/>
+  <xacro:include filename="$(find ${package_name})/urdf/kinect_dk.xacro"/>
+  <xacro:include filename="$(find ${package_name})/urdf/arm_support.xacro"/>
+  <xacro:include filename="$(find ${package_name})/urdf/gps_antenna.xacro"/>
+  <xacro:include filename="$(find ${package_name})/urdf/sensor_support.xacro"/>
+  <xacro:include filename="$(find ${package_name})/urdf/realsense_support.xacro"/>
+  <xacro:include filename="$(find realsense2_description)/urdf/_d435i.urdf.xacro"/>
+  <xacro:include filename="$(find ${package_name})/urdf/robotiq_gripper_base.urdf.xacro"/>
+  <xacro:include filename="$(find robotiq_85_description)/urdf/robotiq_85_gripper.urdf.xacro"/>
+
+  <link name="base_footprint"/>
+  <joint name="base_footprint_joint" type="fixed">
+    <origin xyz="0 0 0.23" rpy="0 0 0"/>
+      <parent link="base_footprint"/>
+      <child link="base_link"/>
+  </joint>
+
+  <link name="mid_mount"/>
+  <joint name="mid_mount_joint" type="fixed">
+    <origin xyz="0 0 0.113" rpy="0 0 0"/>
+      <parent link="base_link"/>
+      <child link="mid_mount"/>
+  </joint>
+
+  <!-- IQR sensor support -->
+  <xacro:sensor_support package="${package_name}" parent="mid_mount">
+    <origin xyz="-0.165 0 0" rpy="0 0 0"/>
+  </xacro:sensor_support>
+
+  <!-- IQR arm support -->
+  <xacro:arm_support package="${package_name}" parent="mid_mount">
+    <origin xyz="0.240 0 0" rpy="0 0 0"/>
+  </xacro:arm_support>
+
+  <!-- AUBO i5 ARM -->
+  <xacro:aubo_i5 package="${package_name}" parent="arm_mount">
+    <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+  </xacro:aubo_i5>
+
+  <!-- VLP-16 lidar -->
+  <xacro:vlp16 package="${package_name}" parent="lidar_mount">
+    <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+  </xacro:vlp16>
+
+  <!-- KINECT DK -->
+  <xacro:kinect_dk package="${package_name}" parent="dk_mount">
+    <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+  </xacro:kinect_dk>
+
+  <!-- realsense d435i support -->
+  <xacro:realsense_support package="${package_name}" parent="aubo_end_mount">
+    <origin xyz="0.0 0.0 0.0" rpy="0 -1.5707963 -1.5707963"/>
+  </xacro:realsense_support>
+
+  <!-- realsense d435i -->
+  <xacro:sensor_d435i parent="realsense_mount">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </xacro:sensor_d435i>
+
+  <!-- robotiq robotiq gripper base -->
+  <xacro:robotiq_gripper_base package="${package_name}" parent="robotiq_base_mount">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </xacro:robotiq_gripper_base>
+
+  <!-- robotiq 85 gripper -->
+  <xacro:robotiq_85_gripper prefix="" parent="robotiq_gripper_mount">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </xacro:robotiq_85_gripper>
+
+  <!-- main gps antenna -->
+  <xacro:gps_antenna package="${package_name}" name="main" parent="mid_mount">
+    <origin xyz="-0.45493 0 -0.1065" rpy="0 0 0"/>
+  </xacro:gps_antenna>
+
+  <!-- second gps antenna -->
+  <xacro:gps_antenna package="${package_name}" name="second" parent="mid_mount">
+    <origin xyz="0.45493 0 -0.1065" rpy="0 0 0"/>
+  </xacro:gps_antenna>
+
+</robot>

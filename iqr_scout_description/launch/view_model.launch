@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+  <arg name="dk_tf_prefix" default="dk"/>
+
+  <arg name="rvizconfig" default="$(find iqr_scout_description)/rviz/view_model.rviz"/>
+  <arg name="model" default="xacro $(find iqr_scout_description)/urdf/iqr_scout_robot.urdf.xacro"/>
+
+  <param name="robot_description" command="$(arg model) dk_tf_prefix:=$(arg dk_tf_prefix)/"/>
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui"/>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true"/>
+
+</launch> 
