@@ -29,9 +29,9 @@
   </xacro:arm_support>
 
   <!-- AUBO i5 ARM -->
-  <!-- <xacro:aubo_i5 package="${package_name}" parent="arm_mount">
-    <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
-  </xacro:aubo_i5> -->
+  <xacro:aubo_i5 package="${package_name}" parent="arm_mount">
+    <origin xyz="0.0 0.0 0.0" rpy="0 0 1.5707963"/>
+  </xacro:aubo_i5>
 
   <!-- VLP-16 lidar -->
   <xacro:vlp16 package="${package_name}" parent="lidar_mount">
@@ -44,33 +44,61 @@
   </xacro:kinect_dk>
 
   <!-- realsense d435i support -->
-  <!-- <xacro:realsense_support package="${package_name}" parent="aubo_end_mount">
+  <xacro:realsense_support package="${package_name}" parent="aubo_end_mount">
     <origin xyz="0.0 0.0 0.0" rpy="0 -1.5707963 -1.5707963"/>
-  </xacro:realsense_support> -->
+  </xacro:realsense_support>
 
   <!-- realsense d435i -->
-  <!-- <xacro:sensor_d435i parent="realsense_mount">
+  <xacro:sensor_d435i parent="realsense_mount">
     <origin xyz="0 0 0" rpy="0 0 0"/>
-  </xacro:sensor_d435i> -->
+  </xacro:sensor_d435i>
 
   <!-- robotiq robotiq gripper base -->
-  <!-- <xacro:robotiq_gripper_base package="${package_name}" parent="robotiq_base_mount">
+  <xacro:robotiq_gripper_base package="${package_name}" parent="robotiq_base_mount">
     <origin xyz="0 0 0" rpy="0 0 0"/>
-  </xacro:robotiq_gripper_base> -->
+  </xacro:robotiq_gripper_base>
 
   <!-- robotiq 85 gripper -->
-  <!-- <xacro:robotiq_85_gripper prefix="" parent="robotiq_gripper_mount">
+  <xacro:robotiq_85_gripper prefix="" parent="robotiq_gripper_mount">
     <origin xyz="0 0 0" rpy="0 0 0"/>
-  </xacro:robotiq_85_gripper> -->
+  </xacro:robotiq_85_gripper>
 
   <!-- main gps antenna -->
-  <xacro:gps_antenna package="${package_name}" name="main" parent="mid_mount">
-    <origin xyz="-0.45493 0 -0.1065" rpy="0 0 0"/>
-  </xacro:gps_antenna>
+  <link name="main_gps_antenna">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://${package_name}/urdf/mesh/gps_antenna.stl"/>
+      </geometry>
+      <material name="">
+        <color rgba="1.0 1.0 0.9 1"/>
+      </material>
+    </visual>
+  </link>
+  <joint name="main_gps_antenna_joint" type="fixed">
+    <origin xyz="-0.14144 0 0.6199" rpy="0 0 0"/>
+    <parent link="sensor_support_link"/>
+    <child link="main_gps_antenna"/>
+  </joint>
+
+  <link name="main_gps_link"/>
+  <joint name="main_gps_link_joint" type="fixed">
+    <origin xyz="0 0 0.107" rpy="0 0 0"/>
+    <parent link="main_gps_antenna"/>
+    <child link="main_gps_link"/>
+  </joint>
 
   <!-- second gps antenna -->
   <xacro:gps_antenna package="${package_name}" name="second" parent="mid_mount">
     <origin xyz="0.45493 0 -0.1065" rpy="0 0 0"/>
   </xacro:gps_antenna>
+
+  <!-- tool link -->
+  <link name="tool_link"/>
+  <joint name="tool_link_joint" type="fixed">
+    <origin xyz="0.14 0 0" rpy="0 0 0"/>
+    <parent link="robotiq_gripper_mount"/>
+    <child link="tool_link"/>
+  </joint>
 
 </robot>

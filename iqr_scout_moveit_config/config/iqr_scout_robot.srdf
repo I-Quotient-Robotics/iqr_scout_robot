@@ -1,0 +1,311 @@
+<?xml version="1.0" ?>
+<!--This does not replace URDF, and is not an extension of URDF.
+    This is a format for representing semantic information about the robot structure.
+    A URDF file must exist for this robot as well, where the joints and the links that are referenced are defined
+-->
+<robot name="iqr_scout_robot">
+    <!--GROUPS: Representation of a set of joints and links. This can be useful for specifying DOF to plan for, defining arms, end effectors, etc-->
+    <!--LINKS: When a link is specified, the parent joint of that link (if it exists) is automatically included-->
+    <!--JOINTS: When a joint is specified, the child link of that joint (which will always exist) is automatically included-->
+    <!--CHAINS: When a chain is specified, all the links along the chain (including endpoints) are included in the group. Additionally, all the joints that are parents to included links are also included. This means that joints along the chain and the parent joint of the base link are included in the group-->
+    <!--SUBGROUPS: Groups can also be formed by referencing to already defined group names-->
+    <group name="arm">
+        <chain base_link="base_footprint" tip_link="aubo_end_mount" />
+    </group>
+    <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
+    <group_state name="home" group="arm">
+        <joint name="foreArm_joint" value="2.6" />
+        <joint name="shoulder_joint" value="-1.5707" />
+        <joint name="upperArm_joint" value="0.6" />
+        <joint name="wrist1_joint" value="1" />
+        <joint name="wrist2_joint" value="1.5707" />
+        <joint name="wrist3_joint" value="0" />
+    </group_state>
+    <group_state name="pose1" group="arm">
+        <joint name="foreArm_joint" value="2.1707" />
+        <joint name="shoulder_joint" value="-1.5707" />
+        <joint name="upperArm_joint" value="0.6" />
+        <joint name="wrist1_joint" value="1.5707" />
+        <joint name="wrist2_joint" value="1.5707" />
+        <joint name="wrist3_joint" value="0" />
+    </group_state>
+    <group_state name="pose2" group="arm">
+        <joint name="foreArm_joint" value="2.1707" />
+        <joint name="shoulder_joint" value="-1.5707" />
+        <joint name="upperArm_joint" value="0" />
+        <joint name="wrist1_joint" value="1.5707" />
+        <joint name="wrist2_joint" value="1.5707" />
+        <joint name="wrist3_joint" value="0" />
+    </group_state>
+    <group_state name="pose3" group="arm">
+        <joint name="foreArm_joint" value="1.5707" />
+        <joint name="shoulder_joint" value="-1.5707" />
+        <joint name="upperArm_joint" value="0" />
+        <joint name="wrist1_joint" value="1.5707" />
+        <joint name="wrist2_joint" value="1.5707" />
+        <joint name="wrist3_joint" value="0" />
+    </group_state>
+    <group_state name="pose4" group="arm">
+        <joint name="foreArm_joint" value="1.5707" />
+        <joint name="shoulder_joint" value="-1.5707" />
+        <joint name="upperArm_joint" value="0" />
+        <joint name="wrist1_joint" value="0" />
+        <joint name="wrist2_joint" value="1.5707" />
+        <joint name="wrist3_joint" value="0" />
+    </group_state>
+    <group_state name="pose6" group="arm">
+        <joint name="foreArm_joint" value="1.5707" />
+        <joint name="shoulder_joint" value="-1.5707" />
+        <joint name="upperArm_joint" value="-1" />
+        <joint name="wrist1_joint" value="1" />
+        <joint name="wrist2_joint" value="1.5707" />
+        <joint name="wrist3_joint" value="0" />
+    </group_state>
+    <group_state name="pose7" group="arm">
+        <joint name="foreArm_joint" value="2" />
+        <joint name="shoulder_joint" value="-1.5707" />
+        <joint name="upperArm_joint" value="-0.4" />
+        <joint name="wrist1_joint" value="2.4" />
+        <joint name="wrist2_joint" value="1.5707" />
+        <joint name="wrist3_joint" value="0" />
+    </group_state>
+    <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
+    <end_effector name="end_effect" parent_link="tool_link" group="arm" />
+    <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
+    <virtual_joint name="virtual_joint" type="fixed" parent_frame="/world" child_link="base_footprint" />
+    <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
+    <disable_collisions link1="arm_support_link" link2="aubo_base_link" reason="Adjacent" />
+    <disable_collisions link1="arm_support_link" link2="base_link" reason="Adjacent" />
+    <disable_collisions link1="arm_support_link" link2="camera_base" reason="Never" />
+    <disable_collisions link1="arm_support_link" link2="camera_body" reason="Never" />
+    <disable_collisions link1="arm_support_link" link2="camera_visor" reason="Never" />
+    <disable_collisions link1="arm_support_link" link2="front_left_wheel_link" reason="Never" />
+    <disable_collisions link1="arm_support_link" link2="front_right_wheel_link" reason="Never" />
+    <disable_collisions link1="arm_support_link" link2="main_gps_antenna" reason="Never" />
+    <disable_collisions link1="arm_support_link" link2="rear_left_wheel_link" reason="Never" />
+    <disable_collisions link1="arm_support_link" link2="rear_right_wheel_link" reason="Never" />
+    <disable_collisions link1="arm_support_link" link2="second_gps_antenna" reason="Never" />
+    <disable_collisions link1="arm_support_link" link2="second_gps_antenna_support" reason="Adjacent" />
+    <disable_collisions link1="arm_support_link" link2="sensor_support_link" reason="Adjacent" />
+    <disable_collisions link1="arm_support_link" link2="shoulder_Link" reason="Never" />
+    <disable_collisions link1="arm_support_link" link2="vlp16_link" reason="Never" />
+    <disable_collisions link1="aubo_base_link" link2="base_link" reason="Never" />
+    <disable_collisions link1="aubo_base_link" link2="camera_base" reason="Never" />
+    <disable_collisions link1="aubo_base_link" link2="camera_body" reason="Never" />
+    <disable_collisions link1="aubo_base_link" link2="camera_visor" reason="Never" />
+    <disable_collisions link1="aubo_base_link" link2="front_left_wheel_link" reason="Never" />
+    <disable_collisions link1="aubo_base_link" link2="front_right_wheel_link" reason="Never" />
+    <disable_collisions link1="aubo_base_link" link2="main_gps_antenna" reason="Never" />
+    <disable_collisions link1="aubo_base_link" link2="rear_left_wheel_link" reason="Never" />
+    <disable_collisions link1="aubo_base_link" link2="rear_right_wheel_link" reason="Never" />
+    <disable_collisions link1="aubo_base_link" link2="second_gps_antenna" reason="Never" />
+    <disable_collisions link1="aubo_base_link" link2="second_gps_antenna_support" reason="Never" />
+    <disable_collisions link1="aubo_base_link" link2="sensor_support_link" reason="Never" />
+    <disable_collisions link1="aubo_base_link" link2="shoulder_Link" reason="Adjacent" />
+    <disable_collisions link1="aubo_base_link" link2="upperArm_Link" reason="Never" />
+    <disable_collisions link1="aubo_base_link" link2="vlp16_link" reason="Never" />
+    <disable_collisions link1="base_link" link2="camera_base" reason="Never" />
+    <disable_collisions link1="base_link" link2="camera_body" reason="Never" />
+    <disable_collisions link1="base_link" link2="camera_visor" reason="Never" />
+    <disable_collisions link1="base_link" link2="front_left_wheel_link" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="front_right_wheel_link" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="main_gps_antenna" reason="Never" />
+    <disable_collisions link1="base_link" link2="rear_left_wheel_link" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="rear_right_wheel_link" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="second_gps_antenna" reason="Default" />
+    <disable_collisions link1="base_link" link2="second_gps_antenna_support" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="sensor_support_link" reason="Adjacent" />
+    <disable_collisions link1="base_link" link2="shoulder_Link" reason="Never" />
+    <disable_collisions link1="base_link" link2="vlp16_link" reason="Never" />
+    <disable_collisions link1="camera_base" link2="camera_body" reason="Adjacent" />
+    <disable_collisions link1="camera_base" link2="camera_visor" reason="Adjacent" />
+    <disable_collisions link1="camera_base" link2="front_left_wheel_link" reason="Never" />
+    <disable_collisions link1="camera_base" link2="front_right_wheel_link" reason="Never" />
+    <disable_collisions link1="camera_base" link2="main_gps_antenna" reason="Never" />
+    <disable_collisions link1="camera_base" link2="rear_left_wheel_link" reason="Never" />
+    <disable_collisions link1="camera_base" link2="rear_right_wheel_link" reason="Never" />
+    <disable_collisions link1="camera_base" link2="second_gps_antenna" reason="Never" />
+    <disable_collisions link1="camera_base" link2="second_gps_antenna_support" reason="Never" />
+    <disable_collisions link1="camera_base" link2="sensor_support_link" reason="Never" />
+    <disable_collisions link1="camera_base" link2="shoulder_Link" reason="Never" />
+    <disable_collisions link1="camera_base" link2="upperArm_Link" reason="Never" />
+    <disable_collisions link1="camera_base" link2="vlp16_link" reason="Never" />
+    <disable_collisions link1="camera_body" link2="camera_visor" reason="Never" />
+    <disable_collisions link1="camera_body" link2="front_left_wheel_link" reason="Never" />
+    <disable_collisions link1="camera_body" link2="front_right_wheel_link" reason="Never" />
+    <disable_collisions link1="camera_body" link2="main_gps_antenna" reason="Never" />
+    <disable_collisions link1="camera_body" link2="rear_left_wheel_link" reason="Never" />
+    <disable_collisions link1="camera_body" link2="rear_right_wheel_link" reason="Never" />
+    <disable_collisions link1="camera_body" link2="second_gps_antenna" reason="Never" />
+    <disable_collisions link1="camera_body" link2="second_gps_antenna_support" reason="Never" />
+    <disable_collisions link1="camera_body" link2="sensor_support_link" reason="Adjacent" />
+    <disable_collisions link1="camera_body" link2="shoulder_Link" reason="Never" />
+    <disable_collisions link1="camera_body" link2="upperArm_Link" reason="Never" />
+    <disable_collisions link1="camera_body" link2="vlp16_link" reason="Never" />
+    <disable_collisions link1="camera_link" link2="gripper_base_link" reason="Never" />
+    <disable_collisions link1="camera_link" link2="gripper_finger1_finger_link" reason="Never" />
+    <disable_collisions link1="camera_link" link2="gripper_finger1_finger_tip_link" reason="Never" />
+    <disable_collisions link1="camera_link" link2="gripper_finger1_inner_knuckle_link" reason="Never" />
+    <disable_collisions link1="camera_link" link2="gripper_finger1_knuckle_link" reason="Never" />
+    <disable_collisions link1="camera_link" link2="gripper_finger2_finger_link" reason="Never" />
+    <disable_collisions link1="camera_link" link2="gripper_finger2_finger_tip_link" reason="Never" />
+    <disable_collisions link1="camera_link" link2="gripper_finger2_inner_knuckle_link" reason="Never" />
+    <disable_collisions link1="camera_link" link2="gripper_finger2_knuckle_link" reason="Never" />
+    <disable_collisions link1="camera_link" link2="realsense_support_link" reason="Adjacent" />
+    <disable_collisions link1="camera_link" link2="robotiq_gripper_base_link" reason="Never" />
+    <disable_collisions link1="camera_link" link2="wrist1_Link" reason="Never" />
+    <disable_collisions link1="camera_link" link2="wrist2_Link" reason="Never" />
+    <disable_collisions link1="camera_link" link2="wrist3_Link" reason="Never" />
+    <disable_collisions link1="camera_visor" link2="front_left_wheel_link" reason="Never" />
+    <disable_collisions link1="camera_visor" link2="front_right_wheel_link" reason="Never" />
+    <disable_collisions link1="camera_visor" link2="main_gps_antenna" reason="Never" />
+    <disable_collisions link1="camera_visor" link2="rear_left_wheel_link" reason="Never" />
+    <disable_collisions link1="camera_visor" link2="rear_right_wheel_link" reason="Never" />
+    <disable_collisions link1="camera_visor" link2="second_gps_antenna" reason="Never" />
+    <disable_collisions link1="camera_visor" link2="second_gps_antenna_support" reason="Never" />
+    <disable_collisions link1="camera_visor" link2="sensor_support_link" reason="Never" />
+    <disable_collisions link1="camera_visor" link2="shoulder_Link" reason="Never" />
+    <disable_collisions link1="camera_visor" link2="upperArm_Link" reason="Never" />
+    <disable_collisions link1="camera_visor" link2="vlp16_link" reason="Never" />
+    <disable_collisions link1="foreArm_Link" link2="upperArm_Link" reason="Adjacent" />
+    <disable_collisions link1="foreArm_Link" link2="wrist1_Link" reason="Adjacent" />
+    <disable_collisions link1="front_left_wheel_link" link2="front_right_wheel_link" reason="Never" />
+    <disable_collisions link1="front_left_wheel_link" link2="main_gps_antenna" reason="Never" />
+    <disable_collisions link1="front_left_wheel_link" link2="rear_left_wheel_link" reason="Never" />
+    <disable_collisions link1="front_left_wheel_link" link2="rear_right_wheel_link" reason="Never" />
+    <disable_collisions link1="front_left_wheel_link" link2="second_gps_antenna" reason="Never" />
+    <disable_collisions link1="front_left_wheel_link" link2="second_gps_antenna_support" reason="Never" />
+    <disable_collisions link1="front_left_wheel_link" link2="sensor_support_link" reason="Never" />
+    <disable_collisions link1="front_left_wheel_link" link2="shoulder_Link" reason="Never" />
+    <disable_collisions link1="front_left_wheel_link" link2="vlp16_link" reason="Never" />
+    <disable_collisions link1="front_right_wheel_link" link2="main_gps_antenna" reason="Never" />
+    <disable_collisions link1="front_right_wheel_link" link2="rear_left_wheel_link" reason="Never" />
+    <disable_collisions link1="front_right_wheel_link" link2="rear_right_wheel_link" reason="Never" />
+    <disable_collisions link1="front_right_wheel_link" link2="second_gps_antenna" reason="Never" />
+    <disable_collisions link1="front_right_wheel_link" link2="second_gps_antenna_support" reason="Never" />
+    <disable_collisions link1="front_right_wheel_link" link2="sensor_support_link" reason="Never" />
+    <disable_collisions link1="front_right_wheel_link" link2="shoulder_Link" reason="Never" />
+    <disable_collisions link1="front_right_wheel_link" link2="vlp16_link" reason="Never" />
+    <disable_collisions link1="gripper_base_link" link2="gripper_finger1_finger_link" reason="Never" />
+    <disable_collisions link1="gripper_base_link" link2="gripper_finger1_finger_tip_link" reason="Never" />
+    <disable_collisions link1="gripper_base_link" link2="gripper_finger1_inner_knuckle_link" reason="Adjacent" />
+    <disable_collisions link1="gripper_base_link" link2="gripper_finger1_knuckle_link" reason="Adjacent" />
+    <disable_collisions link1="gripper_base_link" link2="gripper_finger2_finger_link" reason="Never" />
+    <disable_collisions link1="gripper_base_link" link2="gripper_finger2_finger_tip_link" reason="Never" />
+    <disable_collisions link1="gripper_base_link" link2="gripper_finger2_inner_knuckle_link" reason="Adjacent" />
+    <disable_collisions link1="gripper_base_link" link2="gripper_finger2_knuckle_link" reason="Adjacent" />
+    <disable_collisions link1="gripper_base_link" link2="realsense_support_link" reason="Never" />
+    <disable_collisions link1="gripper_base_link" link2="robotiq_gripper_base_link" reason="Adjacent" />
+    <disable_collisions link1="gripper_base_link" link2="wrist1_Link" reason="Never" />
+    <disable_collisions link1="gripper_base_link" link2="wrist2_Link" reason="Never" />
+    <disable_collisions link1="gripper_base_link" link2="wrist3_Link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_finger_link" link2="gripper_finger1_finger_tip_link" reason="Default" />
+    <disable_collisions link1="gripper_finger1_finger_link" link2="gripper_finger1_inner_knuckle_link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_finger_link" link2="gripper_finger1_knuckle_link" reason="Adjacent" />
+    <disable_collisions link1="gripper_finger1_finger_link" link2="gripper_finger2_finger_link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_finger_link" link2="gripper_finger2_finger_tip_link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_finger_link" link2="gripper_finger2_inner_knuckle_link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_finger_link" link2="gripper_finger2_knuckle_link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_finger_link" link2="realsense_support_link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_finger_link" link2="robotiq_gripper_base_link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_finger_link" link2="wrist1_Link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_finger_link" link2="wrist2_Link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_finger_link" link2="wrist3_Link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_finger_tip_link" link2="gripper_finger1_inner_knuckle_link" reason="Adjacent" />
+    <disable_collisions link1="gripper_finger1_finger_tip_link" link2="gripper_finger1_knuckle_link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_finger_tip_link" link2="gripper_finger2_finger_link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_finger_tip_link" link2="gripper_finger2_inner_knuckle_link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_finger_tip_link" link2="gripper_finger2_knuckle_link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_finger_tip_link" link2="realsense_support_link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_finger_tip_link" link2="robotiq_gripper_base_link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_finger_tip_link" link2="wrist1_Link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_finger_tip_link" link2="wrist2_Link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_finger_tip_link" link2="wrist3_Link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_inner_knuckle_link" link2="gripper_finger1_knuckle_link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_inner_knuckle_link" link2="gripper_finger2_finger_link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_inner_knuckle_link" link2="gripper_finger2_finger_tip_link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_inner_knuckle_link" link2="gripper_finger2_inner_knuckle_link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_inner_knuckle_link" link2="gripper_finger2_knuckle_link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_inner_knuckle_link" link2="realsense_support_link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_inner_knuckle_link" link2="robotiq_gripper_base_link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_inner_knuckle_link" link2="wrist1_Link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_inner_knuckle_link" link2="wrist2_Link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_inner_knuckle_link" link2="wrist3_Link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_knuckle_link" link2="gripper_finger2_finger_link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_knuckle_link" link2="gripper_finger2_finger_tip_link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_knuckle_link" link2="gripper_finger2_inner_knuckle_link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_knuckle_link" link2="gripper_finger2_knuckle_link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_knuckle_link" link2="realsense_support_link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_knuckle_link" link2="robotiq_gripper_base_link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_knuckle_link" link2="wrist1_Link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_knuckle_link" link2="wrist2_Link" reason="Never" />
+    <disable_collisions link1="gripper_finger1_knuckle_link" link2="wrist3_Link" reason="Never" />
+    <disable_collisions link1="gripper_finger2_finger_link" link2="gripper_finger2_finger_tip_link" reason="Default" />
+    <disable_collisions link1="gripper_finger2_finger_link" link2="gripper_finger2_inner_knuckle_link" reason="Never" />
+    <disable_collisions link1="gripper_finger2_finger_link" link2="gripper_finger2_knuckle_link" reason="Adjacent" />
+    <disable_collisions link1="gripper_finger2_finger_link" link2="realsense_support_link" reason="Never" />
+    <disable_collisions link1="gripper_finger2_finger_link" link2="robotiq_gripper_base_link" reason="Never" />
+    <disable_collisions link1="gripper_finger2_finger_link" link2="wrist1_Link" reason="Never" />
+    <disable_collisions link1="gripper_finger2_finger_link" link2="wrist2_Link" reason="Never" />
+    <disable_collisions link1="gripper_finger2_finger_link" link2="wrist3_Link" reason="Never" />
+    <disable_collisions link1="gripper_finger2_finger_tip_link" link2="gripper_finger2_inner_knuckle_link" reason="Adjacent" />
+    <disable_collisions link1="gripper_finger2_finger_tip_link" link2="gripper_finger2_knuckle_link" reason="Never" />
+    <disable_collisions link1="gripper_finger2_finger_tip_link" link2="realsense_support_link" reason="Never" />
+    <disable_collisions link1="gripper_finger2_finger_tip_link" link2="robotiq_gripper_base_link" reason="Never" />
+    <disable_collisions link1="gripper_finger2_finger_tip_link" link2="wrist1_Link" reason="Never" />
+    <disable_collisions link1="gripper_finger2_finger_tip_link" link2="wrist2_Link" reason="Never" />
+    <disable_collisions link1="gripper_finger2_finger_tip_link" link2="wrist3_Link" reason="Never" />
+    <disable_collisions link1="gripper_finger2_inner_knuckle_link" link2="gripper_finger2_knuckle_link" reason="Never" />
+    <disable_collisions link1="gripper_finger2_inner_knuckle_link" link2="realsense_support_link" reason="Never" />
+    <disable_collisions link1="gripper_finger2_inner_knuckle_link" link2="robotiq_gripper_base_link" reason="Never" />
+    <disable_collisions link1="gripper_finger2_inner_knuckle_link" link2="wrist1_Link" reason="Never" />
+    <disable_collisions link1="gripper_finger2_inner_knuckle_link" link2="wrist2_Link" reason="Never" />
+    <disable_collisions link1="gripper_finger2_inner_knuckle_link" link2="wrist3_Link" reason="Never" />
+    <disable_collisions link1="gripper_finger2_knuckle_link" link2="realsense_support_link" reason="Never" />
+    <disable_collisions link1="gripper_finger2_knuckle_link" link2="robotiq_gripper_base_link" reason="Never" />
+    <disable_collisions link1="gripper_finger2_knuckle_link" link2="wrist1_Link" reason="Never" />
+    <disable_collisions link1="gripper_finger2_knuckle_link" link2="wrist2_Link" reason="Never" />
+    <disable_collisions link1="gripper_finger2_knuckle_link" link2="wrist3_Link" reason="Never" />
+    <disable_collisions link1="main_gps_antenna" link2="rear_left_wheel_link" reason="Never" />
+    <disable_collisions link1="main_gps_antenna" link2="rear_right_wheel_link" reason="Never" />
+    <disable_collisions link1="main_gps_antenna" link2="second_gps_antenna" reason="Never" />
+    <disable_collisions link1="main_gps_antenna" link2="second_gps_antenna_support" reason="Never" />
+    <disable_collisions link1="main_gps_antenna" link2="sensor_support_link" reason="Adjacent" />
+    <disable_collisions link1="main_gps_antenna" link2="shoulder_Link" reason="Never" />
+    <disable_collisions link1="main_gps_antenna" link2="upperArm_Link" reason="Never" />
+    <disable_collisions link1="main_gps_antenna" link2="vlp16_link" reason="Never" />
+    <disable_collisions link1="realsense_support_link" link2="robotiq_gripper_base_link" reason="Adjacent" />
+    <disable_collisions link1="realsense_support_link" link2="wrist1_Link" reason="Never" />
+    <disable_collisions link1="realsense_support_link" link2="wrist2_Link" reason="Never" />
+    <disable_collisions link1="realsense_support_link" link2="wrist3_Link" reason="Adjacent" />
+    <disable_collisions link1="rear_left_wheel_link" link2="rear_right_wheel_link" reason="Never" />
+    <disable_collisions link1="rear_left_wheel_link" link2="second_gps_antenna" reason="Never" />
+    <disable_collisions link1="rear_left_wheel_link" link2="second_gps_antenna_support" reason="Never" />
+    <disable_collisions link1="rear_left_wheel_link" link2="sensor_support_link" reason="Never" />
+    <disable_collisions link1="rear_left_wheel_link" link2="shoulder_Link" reason="Never" />
+    <disable_collisions link1="rear_left_wheel_link" link2="vlp16_link" reason="Never" />
+    <disable_collisions link1="rear_right_wheel_link" link2="second_gps_antenna" reason="Never" />
+    <disable_collisions link1="rear_right_wheel_link" link2="second_gps_antenna_support" reason="Never" />
+    <disable_collisions link1="rear_right_wheel_link" link2="sensor_support_link" reason="Never" />
+    <disable_collisions link1="rear_right_wheel_link" link2="shoulder_Link" reason="Never" />
+    <disable_collisions link1="rear_right_wheel_link" link2="vlp16_link" reason="Never" />
+    <disable_collisions link1="robotiq_gripper_base_link" link2="wrist1_Link" reason="Never" />
+    <disable_collisions link1="robotiq_gripper_base_link" link2="wrist2_Link" reason="Never" />
+    <disable_collisions link1="robotiq_gripper_base_link" link2="wrist3_Link" reason="Never" />
+    <disable_collisions link1="second_gps_antenna" link2="second_gps_antenna_support" reason="Adjacent" />
+    <disable_collisions link1="second_gps_antenna" link2="sensor_support_link" reason="Never" />
+    <disable_collisions link1="second_gps_antenna" link2="shoulder_Link" reason="Never" />
+    <disable_collisions link1="second_gps_antenna" link2="vlp16_link" reason="Never" />
+    <disable_collisions link1="second_gps_antenna_support" link2="sensor_support_link" reason="Adjacent" />
+    <disable_collisions link1="second_gps_antenna_support" link2="shoulder_Link" reason="Never" />
+    <disable_collisions link1="second_gps_antenna_support" link2="vlp16_link" reason="Never" />
+    <disable_collisions link1="sensor_support_link" link2="shoulder_Link" reason="Never" />
+    <disable_collisions link1="sensor_support_link" link2="vlp16_link" reason="Adjacent" />
+    <disable_collisions link1="shoulder_Link" link2="upperArm_Link" reason="Adjacent" />
+    <disable_collisions link1="shoulder_Link" link2="vlp16_link" reason="Never" />
+    <disable_collisions link1="shoulder_Link" link2="wrist1_Link" reason="Never" />
+    <disable_collisions link1="upperArm_Link" link2="vlp16_link" reason="Never" />
+    <disable_collisions link1="wrist1_Link" link2="wrist2_Link" reason="Adjacent" />
+    <disable_collisions link1="wrist1_Link" link2="wrist3_Link" reason="Never" />
+    <disable_collisions link1="wrist2_Link" link2="wrist3_Link" reason="Adjacent" />
+</robot>

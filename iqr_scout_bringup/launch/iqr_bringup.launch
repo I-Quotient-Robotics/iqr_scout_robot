@@ -10,12 +10,15 @@
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
 
   <!-- scout 2.0 -->
-  <include file="$(find scout_base)/launch/base.launch">
+  <include file="$(find scout_base)/launch/base_without_control.launch">
     <arg name="pub_description" value="false"/>
   </include>
 
   <!-- AUBO i5 -->
-
+  <include file="$(find aubo_base)/launch/base.launch">
+    <arg name="robot_type" default="i5"/>
+    <arg name="pub_description" default="false"/>
+  </include>
 
   <!-- VLP16 -->
   <include file="$(find velodyne_pointcloud)/launch/VLP16_points.launch">
@@ -30,20 +33,31 @@
   </include>
 
   <!-- realsense d435i -->
-  <!-- <include file="$(find realsense2_camera)/launch/includes/nodelet.launch.xml">
+  <include file="$(find realsense2_camera)/launch/includes/nodelet.launch.xml">
     <arg name="tf_prefix"             value="camera"/>
     <arg name="initial_reset"         value="false"/>
     <arg name="enable_sync"           value="true"/>
     <arg name="align_depth"           value="true"/>
     <arg name="enable_pointcloud"     value="true"/>
-  </include> -->
+  </include>
 
   <!-- robotiq 85 gripper -->
-  <!-- <node pkg="robotiq_85_driver" type="robotiq_85_driver" name="robotiq_85_driver" respawn="true" output="screen">
+  <node pkg="robotiq_85_driver" type="robotiq_85_driver" name="robotiq_85_driver" respawn="true" output="screen">
     <param name="num_grippers" value="1"/>
     <param name="comport" value="/dev/gripper_com"/>
     <param name="baud" value="115200"/>
     <param name="prefix" value=""/>
-  </node> -->
+    <remap from="/gripper/joint_states" to="/joint_states"/>
+  </node>
+
+  <!-- GPS -->
+  <node name="nmea_serial_driver_node" pkg="nmea_navsat_driver" type="nmea_serial_driver" output="screen">
+    <param name="port" value="/dev/gps_com"/>
+    <param name="baud" value="115200" />
+    <param name="frame_id" value="main_gps_link" />
+    <param name="use_GNSS_time" value="false" />
+    <param name="time_ref_source" value="gps" />
+    <param name="useRMC" value="false" />
+  </node>
 
 </launch>
