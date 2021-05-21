@@ -71,6 +71,15 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        aubo_base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        aubo_end_mount:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
         base_footprint:
           Alpha: 1
           Show Axes: false
@@ -108,6 +117,11 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
+        foreArm_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         front_left_wheel_link:
           Alpha: 1
           Show Axes: false
@@ -118,7 +132,52 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        inertial_link:
+        gripper_base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_finger1_finger_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_finger1_finger_tip_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_finger1_inner_knuckle_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_finger1_knuckle_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_finger2_finger_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_finger2_finger_tip_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_finger2_inner_knuckle_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        gripper_finger2_knuckle_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        imu_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -127,11 +186,6 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
         main_gps_antenna:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        main_gps_antenna_support:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -195,11 +249,36 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        shoulder_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        upperArm_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         velodyne:
           Alpha: 1
           Show Axes: false
           Show Trail: false
         vlp16_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wrist1_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wrist2_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        wrist3_Link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -218,6 +297,10 @@ Visualization Manager:
         arm_mount:
           Value: true
         arm_support_link:
+          Value: true
+        aubo_base_link:
+          Value: true
+        aubo_end_mount:
           Value: true
         base_footprint:
           Value: true
@@ -251,17 +334,35 @@ Visualization Manager:
           Value: true
         dk_rgb_camera_link:
           Value: true
+        foreArm_Link:
+          Value: true
         front_left_wheel_link:
           Value: true
         front_right_wheel_link:
           Value: true
-        inertial_link:
+        gripper_base_link:
+          Value: true
+        gripper_finger1_finger_link:
+          Value: true
+        gripper_finger1_finger_tip_link:
+          Value: true
+        gripper_finger1_inner_knuckle_link:
+          Value: true
+        gripper_finger1_knuckle_link:
+          Value: true
+        gripper_finger2_finger_link:
+          Value: true
+        gripper_finger2_finger_tip_link:
+          Value: true
+        gripper_finger2_inner_knuckle_link:
+          Value: true
+        gripper_finger2_knuckle_link:
+          Value: true
+        imu_link:
           Value: true
         lidar_mount:
           Value: true
         main_gps_antenna:
-          Value: true
-        main_gps_antenna_support:
           Value: true
         main_gps_link:
           Value: true
@@ -291,9 +392,19 @@ Visualization Manager:
           Value: true
         sensor_support_link:
           Value: true
+        shoulder_Link:
+          Value: true
+        upperArm_Link:
+          Value: true
         velodyne:
           Value: true
         vlp16_link:
+          Value: true
+        wrist1_Link:
+          Value: true
+        wrist2_Link:
+          Value: true
+        wrist3_Link:
           Value: true
       Marker Scale: 0.5
       Name: TF
@@ -308,33 +419,47 @@ Visualization Manager:
                 {}
               front_right_wheel_link:
                 {}
-              inertial_link:
-                {}
               mid_mount:
                 arm_support_link:
                   arm_mount:
-                    {}
-                main_gps_antenna_support:
-                  main_gps_antenna:
-                    {}
-                  main_gps_link:
-                    {}
-                realsense_support_link:
-                  realsense_mount:
-                    camera_bottom_screw_frame:
-                      camera_link:
-                        camera_aligned_depth_to_color_frame:
-                          camera_color_optical_frame:
-                            {}
-                        camera_color_frame:
-                          {}
-                        camera_depth_frame:
-                          camera_depth_optical_frame:
-                            {}
-                  robotiq_base_mount:
-                    robotiq_gripper_base_link:
-                      robotiq_gripper_mount:
-                        {}
+                    aubo_base_link:
+                      shoulder_Link:
+                        upperArm_Link:
+                          foreArm_Link:
+                            wrist1_Link:
+                              wrist2_Link:
+                                wrist3_Link:
+                                  aubo_end_mount:
+                                    realsense_support_link:
+                                      realsense_mount:
+                                        camera_bottom_screw_frame:
+                                          camera_link:
+                                            camera_aligned_depth_to_color_frame:
+                                              camera_color_optical_frame:
+                                                {}
+                                            camera_color_frame:
+                                              {}
+                                            camera_depth_frame:
+                                              camera_depth_optical_frame:
+                                                {}
+                                      robotiq_base_mount:
+                                        robotiq_gripper_base_link:
+                                          robotiq_gripper_mount:
+                                            gripper_base_link:
+                                              gripper_finger1_inner_knuckle_link:
+                                                gripper_finger1_finger_tip_link:
+                                                  {}
+                                              gripper_finger1_knuckle_link:
+                                                gripper_finger1_finger_link:
+                                                  {}
+                                              gripper_finger2_inner_knuckle_link:
+                                                gripper_finger2_finger_tip_link:
+                                                  {}
+                                              gripper_finger2_knuckle_link:
+                                                gripper_finger2_finger_link:
+                                                  {}
+                imu_link:
+                  {}
                 second_gps_antenna_support:
                   second_gps_antenna:
                     {}
@@ -355,6 +480,9 @@ Visualization Manager:
                     vlp16_link:
                       velodyne:
                         {}
+                  main_gps_antenna:
+                    main_gps_link:
+                      {}
               rear_left_wheel_link:
                 {}
               rear_right_wheel_link:
@@ -376,7 +504,7 @@ Visualization Manager:
       Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
-      Max Intensity: 198
+      Max Intensity: 136
       Min Color: 0; 0; 0
       Min Intensity: 0
       Name: vlp16_PointCloud
@@ -406,7 +534,7 @@ Visualization Manager:
       Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
-      Max Intensity: 198
+      Max Intensity: 120
       Min Color: 0; 0; 0
       Min Intensity: 0
       Name: LaserScan
@@ -549,7 +677,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 7.705594062805176
+      Distance: 5.967212200164795
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -564,10 +692,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.6297965049743652
+      Pitch: 0.5997964143753052
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 1.6117403507232666
+      Yaw: 4.151739120483398
     Saved: ~
 Window Geometry:
   Camera:

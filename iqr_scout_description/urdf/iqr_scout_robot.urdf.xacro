@@ -94,11 +94,19 @@
   </xacro:gps_antenna>
 
   <!-- tool link -->
-  <link name="tool_link"/>
+  <!-- <link name="tool_link"/>
   <joint name="tool_link_joint" type="fixed">
     <origin xyz="0.14 0 0" rpy="0 0 0"/>
     <parent link="robotiq_gripper_mount"/>
     <child link="tool_link"/>
+  </joint> -->
+
+  <!-- IMU link -->
+  <link name="imu_link"/>
+  <joint name="imu_link_joint" type="fixed">
+    <origin xyz="0.080 0 0.062" rpy="0 0 0"/>
+    <parent link="mid_mount"/>
+    <child link="imu_link"/>
   </joint>
 
 </robot>

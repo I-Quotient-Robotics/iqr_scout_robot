@@ -12,6 +12,7 @@
   <!-- scout 2.0 -->
   <include file="$(find scout_base)/launch/base_without_control.launch">
     <arg name="pub_description" value="false"/>
+    <arg name="enable_ekf" value="false"/>
   </include>
 
   <!-- AUBO i5 -->
@@ -51,13 +52,14 @@
   </node>
 
   <!-- GPS -->
-  <node name="nmea_serial_driver_node" pkg="nmea_navsat_driver" type="nmea_serial_driver" output="screen">
+  <!-- <node name="nmea_serial_driver_node" pkg="nmea_navsat_driver" type="nmea_serial_driver" output="screen">
     <param name="port" value="/dev/gps_com"/>
-    <param name="baud" value="115200" />
-    <param name="frame_id" value="main_gps_link" />
-    <param name="use_GNSS_time" value="false" />
-    <param name="time_ref_source" value="gps" />
-    <param name="useRMC" value="false" />
-  </node>
+    <param name="baud" value="115200"/>
+    <param name="frame_id" value="main_gps_link"/>
+    <param name="use_GNSS_time" value="false"/>
+    <param name="time_ref_source" value="gps"/>
+    <param name="useRMC" value="false"/>
+  </node> -->
+  <include file="$(find nmea_ros_driver)/launch/bringup.launch"/>
 
 </launch>
