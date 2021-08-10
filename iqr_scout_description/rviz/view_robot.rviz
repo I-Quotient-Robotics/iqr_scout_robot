@@ -20,6 +20,7 @@ Panels:
   - Class: rviz/Views
     Expanded:
       - /Current View1
+      - /Current View1/Focal Point1
     Name: Views
     Splitter Ratio: 0.5
   - Class: rviz/Time
@@ -128,51 +129,6 @@ Visualization Manager:
           Show Trail: false
           Value: true
         front_right_wheel_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        gripper_base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        gripper_finger1_finger_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        gripper_finger1_finger_tip_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        gripper_finger1_inner_knuckle_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        gripper_finger1_knuckle_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        gripper_finger2_finger_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        gripper_finger2_finger_tip_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        gripper_finger2_inner_knuckle_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        gripper_finger2_knuckle_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -306,8 +262,6 @@ Visualization Manager:
           Value: true
         base_link:
           Value: true
-        camera_aligned_depth_to_color_frame:
-          Value: true
         camera_bottom_screw_frame:
           Value: true
         camera_color_frame:
@@ -339,24 +293,6 @@ Visualization Manager:
         front_left_wheel_link:
           Value: true
         front_right_wheel_link:
-          Value: true
-        gripper_base_link:
-          Value: true
-        gripper_finger1_finger_link:
-          Value: true
-        gripper_finger1_finger_tip_link:
-          Value: true
-        gripper_finger1_inner_knuckle_link:
-          Value: true
-        gripper_finger1_knuckle_link:
-          Value: true
-        gripper_finger2_finger_link:
-          Value: true
-        gripper_finger2_finger_tip_link:
-          Value: true
-        gripper_finger2_inner_knuckle_link:
-          Value: true
-        gripper_finger2_knuckle_link:
           Value: true
         imu_link:
           Value: true
@@ -434,32 +370,16 @@ Visualization Manager:
                                       realsense_mount:
                                         camera_bottom_screw_frame:
                                           camera_link:
-                                            camera_aligned_depth_to_color_frame:
+                                            camera_color_frame:
                                               camera_color_optical_frame:
                                                 {}
-                                            camera_color_frame:
-                                              {}
                                             camera_depth_frame:
                                               camera_depth_optical_frame:
                                                 {}
                                       robotiq_base_mount:
                                         robotiq_gripper_base_link:
                                           robotiq_gripper_mount:
-                                            gripper_base_link:
-                                              gripper_finger1_inner_knuckle_link:
-                                                gripper_finger1_finger_tip_link:
-                                                  {}
-                                              gripper_finger1_knuckle_link:
-                                                gripper_finger1_finger_link:
-                                                  {}
-                                              gripper_finger2_inner_knuckle_link:
-                                                gripper_finger2_finger_tip_link:
-                                                  {}
-                                              gripper_finger2_knuckle_link:
-                                                gripper_finger2_finger_link:
-                                                  {}
-                imu_link:
-                  {}
+                                            {}
                 second_gps_antenna_support:
                   second_gps_antenna:
                     {}
@@ -476,6 +396,8 @@ Visualization Manager:
                             {}
                           dk_rgb_camera_link:
                             {}
+                  imu_link:
+                    {}
                   lidar_mount:
                     vlp16_link:
                       velodyne:
@@ -504,7 +426,7 @@ Visualization Manager:
       Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
-      Max Intensity: 136
+      Max Intensity: 255
       Min Color: 0; 0; 0
       Min Intensity: 0
       Name: vlp16_PointCloud
@@ -534,9 +456,9 @@ Visualization Manager:
       Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
-      Max Intensity: 120
+      Max Intensity: 250
       Min Color: 0; 0; 0
-      Min Intensity: 0
+      Min Intensity: 1
       Name: LaserScan
       Position Transformer: XYZ
       Queue Size: 10
@@ -574,12 +496,15 @@ Visualization Manager:
       Size (Pixels): 3
       Size (m): 0.009999999776482582
       Style: Flat Squares
-      Topic: /depth/color/points
+      Topic: /dk/points2
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
       Value: true
     - Alpha: 1
+      Auto Size:
+        Auto Size Factor: 1
+        Value: true
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
         Max Value: 10
@@ -587,32 +512,37 @@ Visualization Manager:
         Value: true
       Axis: Z
       Channel Name: intensity
-      Class: rviz/PointCloud2
+      Class: rviz/DepthCloud
       Color: 255; 255; 255
+      Color Image Topic: ""
       Color Transformer: RGB8
+      Color Transport Hint: raw
       Decay Time: 0
-      Enabled: true
+      Depth Map Topic: /camera/depth/image_rect_raw
+      Depth Map Transport Hint: raw
+      Enabled: false
       Invert Rainbow: false
       Max Color: 255; 255; 255
       Max Intensity: 4096
       Min Color: 0; 0; 0
       Min Intensity: 0
-      Name: PointCloud2
+      Name: DepthCloud
+      Occlusion Compensation:
+        Occlusion Time-Out: 30
+        Value: false
       Position Transformer: XYZ
-      Queue Size: 10
+      Queue Size: 5
       Selectable: true
       Size (Pixels): 3
-      Size (m): 0.009999999776482582
       Style: Flat Squares
-      Topic: /dk/points2
-      Unreliable: false
+      Topic Filter: true
       Use Fixed Frame: true
       Use rainbow: true
-      Value: true
+      Value: false
     - Class: rviz/Camera
       Enabled: true
       Image Rendering: background and overlay
-      Image Topic: /color/image_raw
+      Image Topic: /camera/color/image_raw
       Name: Camera
       Overlay Alpha: 0.5
       Queue Size: 2
@@ -621,7 +551,9 @@ Visualization Manager:
       Value: true
       Visibility:
         Camera: true
+        DepthCloud: true
         Grid: true
+        Imu: true
         LaserScan: true
         PointCloud2: true
         RobotModel: true
@@ -641,7 +573,9 @@ Visualization Manager:
       Value: true
       Visibility:
         Camera: true
+        DepthCloud: true
         Grid: true
+        Imu: true
         LaserScan: true
         PointCloud2: true
         RobotModel: true
@@ -649,6 +583,15 @@ Visualization Manager:
         Value: false
         vlp16_PointCloud: true
       Zoom Factor: 1
+    - Alpha: 0.20000000298023224
+      Class: rviz_plugin_tutorials/Imu
+      Color: 204; 51; 204
+      Enabled: false
+      History Length: 1
+      Name: Imu
+      Topic: /imu/data
+      Unreliable: false
+      Value: false
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -677,25 +620,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 5.967212200164795
+      Distance: 8.121767044067383
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.5540578365325928
-        Y: -0.40845775604248047
-        Z: 0.608566403388977
+        X: 0
+        Y: 0
+        Z: 0
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.5997964143753052
+      Pitch: 0.5
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 4.151739120483398
+      Yaw: 2.5
     Saved: ~
 Window Geometry:
   Camera:

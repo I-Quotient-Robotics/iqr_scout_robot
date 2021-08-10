@@ -59,9 +59,9 @@
   </xacro:robotiq_gripper_base>
 
   <!-- robotiq 85 gripper -->
-  <xacro:robotiq_85_gripper prefix="" parent="robotiq_gripper_mount">
+  <!--xacro:robotiq_85_gripper prefix="" parent="robotiq_gripper_mount">
     <origin xyz="0 0 0" rpy="0 0 0"/>
-  </xacro:robotiq_85_gripper>
+  </xacro:robotiq_85_gripper-->
 
   <!-- main gps antenna -->
   <link name="main_gps_antenna">
@@ -104,8 +104,8 @@
   <!-- IMU link -->
   <link name="imu_link"/>
   <joint name="imu_link_joint" type="fixed">
-    <origin xyz="0.080 0 0.062" rpy="0 0 0"/>
-    <parent link="mid_mount"/>
+    <origin xyz="0.0 0.06107583 0.014" rpy="0 0 0"/>
+    <parent link="sensor_support_link"/>
     <child link="imu_link"/>
   </joint>
 

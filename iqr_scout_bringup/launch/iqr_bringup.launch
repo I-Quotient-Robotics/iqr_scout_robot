@@ -12,7 +12,7 @@
   <!-- scout 2.0 -->
   <include file="$(find scout_base)/launch/base_without_control.launch">
     <arg name="pub_description" value="false"/>
-    <arg name="enable_ekf" value="false"/>
+    <arg name="enable_ekf" value="true"/>
   </include>
 
   <!-- AUBO i5 -->
@@ -34,32 +34,28 @@
   </include>
 
   <!-- realsense d435i -->
-  <include file="$(find realsense2_camera)/launch/includes/nodelet.launch.xml">
+  <include file="$(find realsense2_camera)/launch/rs_camera.launch">
     <arg name="tf_prefix"             value="camera"/>
     <arg name="initial_reset"         value="false"/>
-    <arg name="enable_sync"           value="true"/>
-    <arg name="align_depth"           value="true"/>
-    <arg name="enable_pointcloud"     value="true"/>
   </include>
 
   <!-- robotiq 85 gripper -->
-  <node pkg="robotiq_85_driver" type="robotiq_85_driver" name="robotiq_85_driver" respawn="true" output="screen">
+  <!--node pkg="robotiq_85_driver" type="robotiq_85_driver" name="robotiq_85_driver" respawn="true" output="screen">
     <param name="num_grippers" value="1"/>
     <param name="comport" value="/dev/gripper_com"/>
     <param name="baud" value="115200"/>
     <param name="prefix" value=""/>
     <remap from="/gripper/joint_states" to="/joint_states"/>
-  </node>
+  </node-->
 
   <!-- GPS -->
-  <!-- <node name="nmea_serial_driver_node" pkg="nmea_navsat_driver" type="nmea_serial_driver" output="screen">
-    <param name="port" value="/dev/gps_com"/>
-    <param name="baud" value="115200"/>
-    <param name="frame_id" value="main_gps_link"/>
-    <param name="use_GNSS_time" value="false"/>
-    <param name="time_ref_source" value="gps"/>
-    <param name="useRMC" value="false"/>
-  </node> -->
   <include file="$(find nmea_ros_driver)/launch/bringup.launch"/>
+
+  <!--IMU -->
+  <node pkg="jy901_driver" type="jy901_driver_node" name="jy901_driver_node" output="screen">
+    <param name="baudrate" type="int" value="115200"/>
+    <param name="port" type="string" value="/dev/imu_com"/>
+    <param name="looprate" type="int" value="50"/>
+  </node>
 
 </launch>
