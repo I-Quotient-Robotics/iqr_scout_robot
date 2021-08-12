@@ -2,3 +2,6 @@
 KERNEL=="ttyUSB*", ATTRS{idVendor}=="067b", ATTRS{idProduct}=="2303", MODE:="0777", SYMLINK+="scout_base"
 KERNEL=="ttyUSB*", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", MODE:="0777", SYMLINK+="imu_com"
 KERNEL=="ttyTHS0*", MODE:="0777", SYMLINK+="gps_com"
+
+# teleop
+KERNEL=="js*", ATTRS{idVendor}=="045e", ATTRS{idProduct}=="028e", MODE:="0777", SYMLINK+="input/iqr_teleop"
